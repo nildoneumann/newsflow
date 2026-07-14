@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>News App</title>
+<title>NewsFlow</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -36,14 +36,15 @@ tailwind.config = {
 
   body {
     margin: 0;
-    background: var(--bg-color, #0a0f1a);
+    background: #0a0f1a;
     font-family: 'DM Sans', sans-serif;
     color: #e2e8f0;
     min-height: 100vh;
+    display: flex;
+    flex-direction: column;
     overflow-x: hidden;
   }
 
-  /* Scrollbar customizada */
   ::-webkit-scrollbar { width: 6px; height: 6px; }
   ::-webkit-scrollbar-track { background: transparent; }
   ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 10px; }
@@ -150,6 +151,37 @@ tailwind.config = {
 
   .btn-search:active {
     transform: translateY(0) scale(0.97);
+  }
+
+  /* Select de localidade */
+  .local-select {
+    padding: 14px 40px 14px 16px;
+    border-radius: 14px;
+    border: 1.5px solid #1e293b;
+    background: #111827;
+    color: #e2e8f0;
+    font-weight: 500;
+    font-size: 14px;
+    font-family: 'DM Sans', sans-serif;
+    cursor: pointer;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    outline: none;
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    min-width: 160px;
+  }
+
+  .local-select:focus {
+    border-color: #00e59a;
+    box-shadow: 0 0 0 3px rgba(0,229,154,0.12);
+  }
+
+  .local-select option {
+    background: #111827;
+    color: #e2e8f0;
   }
 
   /* Tags */
@@ -394,11 +426,6 @@ tailwind.config = {
     to { transform: rotate(360deg); }
   }
 
-  .loader-text {
-    font-size: 14px;
-    color: #475569;
-  }
-
   /* Skeleton */
   .skeleton-grid {
     display: grid;
@@ -535,6 +562,67 @@ tailwind.config = {
     font-weight: 700;
   }
 
+  /* Footer */
+  .app-footer {
+    margin-top: auto;
+    border-top: 1px solid rgba(30,41,59,0.5);
+    background: rgba(10,15,26,0.6);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  .app-footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 24px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .footer-brand {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: #475569;
+  }
+
+  .footer-brand span {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    color: #64748b;
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 20px;
+  }
+
+  .footer-links a {
+    font-size: 12px;
+    color: #475569;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover {
+    color: #00e59a;
+  }
+
+  /* Busca responsiva */
+  @media (max-width: 640px) {
+    .search-row {
+      flex-direction: column;
+    }
+    .search-row .local-select {
+      min-width: unset;
+      width: 100%;
+    }
+  }
+
   /* Animação reduce motion */
   @media (prefers-reduced-motion: reduce) {
     .news-card { animation: none; opacity: 1; transform: none; }
@@ -564,20 +652,18 @@ tailwind.config = {
           News<span style="color:#00e59a;">Flow</span>
         </h1>
       </div>
-      <div style="display:flex; align-items:center; gap:12px;">
-        <button id="btnFavFilter" onclick="toggleFavView()" title="Ver favoritos" style="width:38px; height:38px; border-radius:10px; border:1.5px solid #1e293b; background:transparent; color:#475569; font-size:15px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:all 0.25s;">
-          <i class="fa-solid fa-bookmark"></i>
-        </button>
-      </div>
+      <button id="btnFavFilter" onclick="toggleFavView()" title="Ver favoritos" style="width:38px; height:38px; border-radius:10px; border:1.5px solid #1e293b; background:transparent; color:#475569; font-size:15px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:all 0.25s;" aria-label="Filtrar favoritos">
+        <i class="fa-solid fa-bookmark"></i>
+      </button>
     </div>
   </div>
 </header>
 
-<main style="position:relative; z-index:1; max-width:1200px; margin:0 auto; padding:20px;">
+<main style="position:relative; z-index:1; max-width:1200px; margin:0 auto; padding:20px; flex:1;">
 
   <!-- Barra de busca -->
-  <section style="margin-bottom:20px;">
-    <div style="display:flex; gap:10px; align-items:stretch;">
+  <section style="margin-bottom:16px;">
+    <div class="search-row" style="display:flex; gap:10px; align-items:stretch;">
       <div class="search-wrapper" style="flex:1;">
         <input
           type="text"
@@ -587,6 +673,17 @@ tailwind.config = {
         >
         <i class="fa-solid fa-magnifying-glass search-icon"></i>
       </div>
+
+      <select id="localFilter" class="local-select" aria-label="Filtrar por localidade">
+        <option value="">Brasil (Geral)</option>
+        <option value="Paraná">Paraná</option>
+        <option value="Guarapuava">Guarapuava</option>
+        <option value="Curitiba">Curitiba</option>
+        <option value="Londrina">Londrina</option>
+        <option value="Maringá">Maringá</option>
+        <option value="Cascavel">Cascavel</option>
+      </select>
+
       <button class="btn-search" onclick="buscarNoticias()" aria-label="Buscar">
         <i class="fa-solid fa-arrow-right" style="margin-right:4px;"></i> Buscar
       </button>
@@ -594,10 +691,8 @@ tailwind.config = {
   </section>
 
   <!-- Tags de categoria -->
-  <section style="margin-bottom:24px;">
-    <div class="tags-scroll" id="tagsContainer" role="tablist" aria-label="Categorias de notícias">
-      <!-- Preenchido via JS -->
-    </div>
+  <section style="margin-bottom:20px;">
+    <div class="tags-scroll" id="tagsContainer" role="tablist" aria-label="Categorias de notícias"></div>
   </section>
 
   <!-- Barra de resultados -->
@@ -628,6 +723,20 @@ tailwind.config = {
 
 </main>
 
+<!-- Footer -->
+<footer class="app-footer">
+  <div class="app-footer-inner">
+    <div class="footer-brand">
+      <i class="fa-solid fa-bolt" style="color:#00e59a; font-size:11px;"></i>
+      <span>NewsFlow</span> — Notícias em tempo real via Google News
+    </div>
+    <div class="footer-links">
+      <a href="https://news.google.com" target="_blank" rel="noopener noreferrer">Google News</a>
+      <a href="https://rss2json.com" target="_blank" rel="noopener noreferrer">RSS2JSON</a>
+    </div>
+  </div>
+</footer>
+
 <!-- Toasts -->
 <div class="toast-container" id="toastContainer" aria-live="polite"></div>
 
@@ -642,20 +751,25 @@ tailwind.config = {
 
   // === Categorias ===
   const categorias = [
-    { label: 'Brasil', icon: 'fa-solid fa-flag' },
-    { label: 'Paraná', icon: 'fa-solid fa-map-location-dot' },
-    { label: 'Guarapuava', icon: 'fa-solid fa-city' },
-    { label: 'Tempo em Guarapuava', icon: 'fa-solid fa-cloud-sun' },
+    { label: 'Política', icon: 'fa-solid fa-landmark' },
+    { label: 'Economia', icon: 'fa-solid fa-chart-line' },
     { label: 'Tecnologia', icon: 'fa-solid fa-microchip' },
     { label: 'Esportes', icon: 'fa-solid fa-futbol' },
-    { label: 'Economia', icon: 'fa-solid fa-chart-line' },
+    { label: 'Saúde', icon: 'fa-solid fa-heart-pulse' },
+    { label: 'Ciência', icon: 'fa-solid fa-flask' },
+    { label: 'Cultura', icon: 'fa-solid fa-masks-theater' },
     { label: 'Mundo', icon: 'fa-solid fa-globe' },
+    { label: 'Segurança', icon: 'fa-solid fa-shield-halved' },
+    { label: 'Educação', icon: 'fa-solid fa-graduation-cap' },
+    { label: 'Meio Ambiente', icon: 'fa-solid fa-leaf' },
+    { label: 'Entretenimento', icon: 'fa-solid fa-film' },
   ];
 
   // === Renderizar tags ===
   function renderTags() {
     const container = document.getElementById('tagsContainer');
-    container.innerHTML = categorias.map((cat, i) => `
+    if (!container) return;
+    container.innerHTML = categorias.map((cat) => `
       <button
         class="tag-chip ${state.activeTag === cat.label ? 'active' : ''}"
         onclick="buscarTag('${cat.label.replace(/'/g, "\\'")}')"
@@ -738,7 +852,6 @@ tailwind.config = {
     }
     localStorage.setItem('newsflow_favs', JSON.stringify(state.favorites));
 
-    // Se estamos na view de favoritos, re-renderizar
     if (state.showingFavs) renderFavs();
   }
 
@@ -798,7 +911,6 @@ tailwind.config = {
     const favClass = isFav(item.link) ? 'saved' : '';
     const favIcon = isFav(item.link) ? 'fa-solid fa-bookmark' : 'fa-regular fa-bookmark';
 
-    // Limpar descrição de tags HTML
     const cleanDesc = (item.description || '').replace(/<[^>]*>/g, '').trim();
 
     card.innerHTML = `
@@ -836,13 +948,12 @@ tailwind.config = {
     input.value = tag;
 
     if (state.activeTag === tag) {
-      // Desselecionar
       state.activeTag = null;
+      input.value = '';
     } else {
       state.activeTag = tag;
     }
 
-    // Sair da view de favoritos
     if (state.showingFavs) {
       state.showingFavs = false;
       const btn = document.getElementById('btnFavFilter');
@@ -859,13 +970,23 @@ tailwind.config = {
   async function buscarNoticias() {
     if (state.showingFavs) return;
 
-    const query = document.getElementById('search').value.trim() || 'Brasil';
+    const searchTerm = document.getElementById('search').value.trim();
+    const selectedCity = document.getElementById('localFilter').value;
+
+    let query = '';
+    if (searchTerm && selectedCity) {
+      query = `${searchTerm} location:${selectedCity}`;
+    } else if (selectedCity) {
+      query = selectedCity;
+    } else {
+      query = searchTerm || 'Brasil';
+    }
+
     const container = document.getElementById('news');
     const emptyState = document.getElementById('emptyState');
     const resultsBar = document.getElementById('resultsBar');
     const skeleton = document.getElementById('skeleton');
 
-    // Mostrar skeleton
     container.innerHTML = '';
     emptyState.style.display = 'none';
     resultsBar.style.display = 'none';
@@ -889,12 +1010,10 @@ tailwind.config = {
 
       state.currentData = data.items;
 
-      // Barra de resultados
       resultsBar.style.display = 'flex';
       document.getElementById('resultsCount').innerHTML = `<span>${data.items.length}</span> notícia${data.items.length !== 1 ? 's' : ''} encontrada${data.items.length !== 1 ? 's' : ''}`;
       document.getElementById('resultsQuery').textContent = `para "${query}"`;
 
-      // Renderizar cards com stagger
       data.items.slice(0, 20).forEach((item, i) => {
         const card = createCard(item, i);
         container.appendChild(card);
@@ -910,11 +1029,17 @@ tailwind.config = {
   // === Evento de tecla ENTER ===
   document.getElementById('search').addEventListener('keydown', function(e) {
     if (e.key === 'Enter') {
-      // Desselecionar tag ao buscar manualmente
       state.activeTag = null;
       renderTags();
       buscarNoticias();
     }
+  });
+
+  // === Alterar localidade dispara busca ===
+  document.getElementById('localFilter').addEventListener('change', function() {
+    state.activeTag = null;
+    renderTags();
+    buscarNoticias();
   });
 
   // === Inicialização ===
