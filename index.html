@@ -52,7 +52,6 @@ tailwind.config = {
   ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 10px; }
   ::-webkit-scrollbar-thumb:hover { background: #334155; }
 
-  /* Fundo atmosférico */
   .bg-glow {
     position: fixed;
     top: -200px;
@@ -114,10 +113,7 @@ tailwind.config = {
     flex-shrink: 0;
   }
 
-  .header-logo i {
-    color: #0a0f1a;
-    font-size: 16px;
-  }
+  .header-logo i { color: #0a0f1a; font-size: 16px; }
 
   .header-title {
     font-family: 'Space Grotesk', sans-serif;
@@ -127,8 +123,12 @@ tailwind.config = {
     letter-spacing: -0.5px;
   }
 
-  .header-title span {
-    color: #00e59a;
+  .header-title span { color: #00e59a; }
+
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
   }
 
   .btn-icon-header {
@@ -146,16 +146,55 @@ tailwind.config = {
     transition: all 0.25s;
     flex-shrink: 0;
     -webkit-tap-highlight-color: transparent;
+    position: relative;
   }
 
-  .btn-icon-header:active {
-    transform: scale(0.92);
+  .btn-icon-header:active { transform: scale(0.92); }
+
+  .btn-icon-header:hover {
+    border-color: #334155;
+    color: #94a3b8;
+  }
+
+  .btn-icon-header.refreshing {
+    border-color: #00e59a;
+    color: #00e59a;
+    pointer-events: none;
+  }
+
+  .btn-icon-header.refreshing i {
+    animation: spinRefresh 0.7s linear infinite;
+  }
+
+  @keyframes spinRefresh {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  /* Indicador de atualização automática (ponto pulsante) */
+  .auto-refresh-dot {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #00e59a;
+    animation: pulseDot 2s ease-in-out infinite;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .auto-refresh-dot.visible { opacity: 1; }
+
+  @keyframes pulseDot {
+    0%, 100% { transform: scale(1); opacity: 0.6; }
+    50% { transform: scale(1.4); opacity: 1; }
   }
 
   /* Busca */
-  .search-wrapper {
-    position: relative;
-  }
+  .search-wrapper { position: relative; }
 
   .search-wrapper input {
     width: 100%;
@@ -171,10 +210,7 @@ tailwind.config = {
     -webkit-appearance: none;
   }
 
-  .search-wrapper input::placeholder {
-    color: #475569;
-    font-weight: 400;
-  }
+  .search-wrapper input::placeholder { color: #475569; font-weight: 400; }
 
   .search-wrapper input:focus {
     border-color: #00e59a;
@@ -193,9 +229,7 @@ tailwind.config = {
     pointer-events: none;
   }
 
-  .search-wrapper input:focus ~ .search-icon {
-    color: #00e59a;
-  }
+  .search-wrapper input:focus ~ .search-icon { color: #00e59a; }
 
   .search-row {
     display: flex;
@@ -224,11 +258,8 @@ tailwind.config = {
     filter: brightness(1.1);
   }
 
-  .btn-search:active {
-    transform: translateY(0) scale(0.97);
-  }
+  .btn-search:active { transform: translateY(0) scale(0.97); }
 
-  /* Select de localidade */
   .local-select {
     padding: 12px 30px 12px 14px;
     border-radius: 14px;
@@ -255,10 +286,7 @@ tailwind.config = {
     box-shadow: 0 0 0 3px rgba(0,229,154,0.12);
   }
 
-  .local-select option {
-    background: #111827;
-    color: #e2e8f0;
-  }
+  .local-select option { background: #111827; color: #e2e8f0; }
 
   /* Tags */
   .tags-scroll {
@@ -294,9 +322,7 @@ tailwind.config = {
     background: rgba(30,41,59,0.5);
   }
 
-  .tag-chip:active {
-    transform: scale(0.95);
-  }
+  .tag-chip:active { transform: scale(0.95); }
 
   .tag-chip.active {
     border-color: #00e59a;
@@ -332,10 +358,7 @@ tailwind.config = {
   }
 
   @keyframes cardIn {
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    to { opacity: 1; transform: translateY(0); }
   }
 
   .card-thumb {
@@ -356,14 +379,9 @@ tailwind.config = {
     transition: transform 0.5s ease;
   }
 
-  .news-card:hover .card-thumb img {
-    transform: scale(1.05);
-  }
+  .news-card:hover .card-thumb img { transform: scale(1.05); }
 
-  .card-thumb-fallback {
-    font-size: 35px;
-    opacity: 0.15;
-  }
+  .card-thumb-fallback { font-size: 35px; opacity: 0.15; }
 
   .card-body {
     padding: 13px 15px;
@@ -402,9 +420,7 @@ tailwind.config = {
     transition: color 0.2s;
   }
 
-  .news-card:hover .card-title {
-    color: #00e59a;
-  }
+  .news-card:hover .card-title { color: #00e59a; }
 
   .card-desc {
     font-size: 13px;
@@ -448,18 +464,10 @@ tailwind.config = {
     box-shadow: 0 2px 12px rgba(0,229,154,0.15);
   }
 
-  .btn-read:active {
-    transform: scale(0.95);
-  }
+  .btn-read:active { transform: scale(0.95); }
 
-  .btn-read i {
-    font-size: 11px;
-    transition: transform 0.2s;
-  }
-
-  .btn-read:hover i {
-    transform: translateX(3px);
-  }
+  .btn-read i { font-size: 11px; transition: transform 0.2s; }
+  .btn-read:hover i { transform: translateX(3px); }
 
   .btn-fav {
     width: 40px;
@@ -484,9 +492,7 @@ tailwind.config = {
     background: rgba(245,158,11,0.08);
   }
 
-  .btn-fav:active {
-    transform: scale(0.9);
-  }
+  .btn-fav:active { transform: scale(0.9); }
 
   .btn-fav.saved {
     border-color: #f59e0b;
@@ -537,16 +543,8 @@ tailwind.config = {
   }
 
   /* Estado vazio */
-  .empty-state {
-    text-align: center;
-    padding: 80px 20px;
-  }
-
-  .empty-icon {
-    font-size: 56px;
-    margin-bottom: 16px;
-    opacity: 0.2;
-  }
+  .empty-state { text-align: center; padding: 80px 20px; }
+  .empty-icon { font-size: 56px; margin-bottom: 16px; opacity: 0.2; }
 
   .empty-title {
     font-family: 'Space Grotesk', sans-serif;
@@ -594,10 +592,7 @@ tailwind.config = {
     pointer-events: auto;
   }
 
-  .toast.out {
-    animation: toastOut 0.3s ease forwards;
-  }
-
+  .toast.out { animation: toastOut 0.3s ease forwards; }
   .toast i { font-size: 16px; flex-shrink: 0; }
   .toast.success i { color: #00e59a; }
   .toast.error i { color: #ef4444; }
@@ -613,7 +608,7 @@ tailwind.config = {
     to { opacity: 0; transform: translateY(20px) scale(0.95); }
   }
 
-  /* Contagem de resultados */
+  /* Barra de resultados */
   .results-bar {
     display: flex;
     align-items: center;
@@ -621,6 +616,14 @@ tailwind.config = {
     padding: 0 4px;
     margin-bottom: 4px;
     gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .results-left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
   }
 
   .results-count {
@@ -629,9 +632,38 @@ tailwind.config = {
     white-space: nowrap;
   }
 
-  .results-count span {
+  .results-count span { color: #00e59a; font-weight: 700; }
+
+  .cache-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 3px 10px;
+    border-radius: 100px;
+    font-size: 11px;
+    font-weight: 500;
+    white-space: nowrap;
+    transition: all 0.3s;
+  }
+
+  .cache-badge.from-cache {
+    background: rgba(59,130,246,0.1);
+    color: #60a5fa;
+    border: 1px solid rgba(59,130,246,0.15);
+  }
+
+  .cache-badge.from-api {
+    background: rgba(0,229,154,0.08);
     color: #00e59a;
-    font-weight: 700;
+    border: 1px solid rgba(0,229,154,0.12);
+  }
+
+  .cache-badge i { font-size: 9px; }
+
+  .results-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
   }
 
   .results-query {
@@ -644,6 +676,17 @@ tailwind.config = {
     flex: 1;
     min-width: 0;
   }
+
+  .results-timestamp {
+    font-size: 11px;
+    color: #334155;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .results-timestamp i { font-size: 10px; }
 
   /* Footer */
   .app-footer {
@@ -679,92 +722,51 @@ tailwind.config = {
     color: #64748b;
   }
 
-  .footer-links {
-    display: flex;
-    gap: 20px;
-  }
+  .footer-links { display: flex; gap: 20px; }
 
   .footer-links a {
     font-size: 12px;
-    color: #475569;
+    color: green;
     text-decoration: none;
     transition: color 0.2s;
     -webkit-tap-highlight-color: transparent;
   }
 
-  .footer-links a:hover {
-    color: #00e59a;
-  }
+  .footer-links a:hover { color: #00e59a; }
 
-  /* Safe area para notch/barra de navegação */
+  /* Safe area */
   @supports (padding-bottom: env(safe-area-inset-bottom)) {
-    .toast-container {
-      bottom: calc(16px + env(safe-area-inset-bottom));
-    }
-    .app-footer {
-      padding-bottom: env(safe-area-inset-bottom);
-    }
+    .toast-container { bottom: calc(16px + env(safe-area-inset-bottom)); }
+    .app-footer { padding-bottom: env(safe-area-inset-bottom); }
   }
 
-  /* ==============================
-     RESPONSIVIDADE
-     ============================== */
+  /* === RESPONSIVIDADE === */
 
-  /* Tablets pequenos e celulares grandes (até 768px) */
   @media (max-width: 768px) {
-    .news-grid {
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    }
-
-    .skeleton-grid {
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    }
+    .news-grid { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
+    .skeleton-grid { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
   }
 
-  /* Celulares (até 640px) */
   @media (max-width: 640px) {
-    .header-inner {
-      padding: 12px 16px;
-    }
+    .header-inner { padding: 12px 16px; }
+    .header-title { font-size: 19px; }
+    .header-logo { width: 32px; height: 32px; border-radius: 8px; }
+    .header-logo i { font-size: 14px; }
+    .btn-icon-header { width: 38px; height: 38px; }
 
-    .header-title {
-      font-size: 19px;
-    }
-
-    .header-logo {
-      width: 32px;
-      height: 32px;
-      border-radius: 8px;
-    }
-
-    .header-logo i {
-      font-size: 14px;
-    }
-
-    .btn-icon-header {
-      width: 38px;
-      height: 38px;
-    }
-
-    /* Busca empilhada verticalmente */
-    .search-row {
-      flex-direction: column;
-    }
+    .search-row { flex-direction: column; }
 
     .search-wrapper input {
       padding: 12px 14px 12px 40px;
-      font-size: 16px; /* Previne zoom no iOS */
+      font-size: 16px;
       border-radius: 12px;
     }
 
-    .search-icon {
-      left: 14px;
-      font-size: 15px;
-    }
+    .search-icon { left: 14px; font-size: 15px; }
 
     .local-select {
       padding: 12px 30px 12px 14px;
-      font-size: 16px; /* Previne zoom no iOS */
+      font-size: 16px;
       border-radius: 12px;
       min-width: unset;
       width: 100%;
@@ -773,7 +775,7 @@ tailwind.config = {
     .btn-search {
       padding: 10px 15px;
       border-radius: 12px;
-      font-size: 16px; /* Previne zoom no iOS */
+      font-size: 16px;
       width: 100%;
       text-align: center;
       justify-content: center;
@@ -782,181 +784,63 @@ tailwind.config = {
       gap: 6px;
     }
 
-    /* Tags com toque maior */
-    .tag-chip {
-      padding: 8px 10px;
-      font-size: 13px;
-      border-radius: 100px;
-    }
+    .tag-chip { padding: 8px 10px; font-size: 13px; }
 
-    /* Grid single column */
-    .news-grid {
-      grid-template-columns: 1fr;
-      gap: 12px;
-    }
+    .news-grid { grid-template-columns: 1fr; gap: 12px; }
+    .skeleton-grid { grid-template-columns: 1fr; gap: 14px; }
 
-    .skeleton-grid {
-      grid-template-columns: 1fr;
-      gap: 14px;
-    }
+    .card-thumb { height: 80px; }
+    .card-body { padding: 13px 15px; gap: 6px; }
+    .card-title { font-size: 15px; -webkit-line-clamp: 2; }
+    .card-desc { font-size: 13px; -webkit-line-clamp: 2; }
+    .card-footer { padding: 2px 16px 14px; }
+    .btn-read { padding: 10px 16px; font-size: 13px; flex: 1; justify-content: center; }
+    .btn-fav { width: 42px; height: 42px; }
+    .skeleton-thumb { height: 160px; }
+    .skeleton-body { padding: 14px 16px; }
 
-    /* Card ajustado */
-    .card-thumb {
-      height: 80px;
-    }
+    .empty-state { padding: 60px 24px; }
+    .empty-icon { font-size: 44px; }
+    .empty-title { font-size: 18px; }
+    .empty-desc { font-size: 13px; }
 
-    .card-body {
-      padding: 13px 15px;
-      gap: 6px;
-    }
+    .results-bar { flex-direction: column; align-items: flex-start; gap: 4px; }
+    .results-right { width: 100%; justify-content: space-between; }
+    .results-query { text-align: left; flex: 1; }
 
-    .card-title {
-      font-size: 15px;
-      -webkit-line-clamp: 2;
-    }
+    .app-footer-inner { padding: 16px 16px; flex-direction: column; align-items: flex-start; }
+    .footer-links { gap: 16px; }
 
-    .card-desc {
-      font-size: 13px;
-      -webkit-line-clamp: 2;
-    }
-
-    .card-footer {
-      padding: 2px 16px 14px;
-    }
-
-    .btn-read {
-      padding: 10px 16px;
-      font-size: 13px;
-      flex: 1;
-      justify-content: center;
-    }
-
-    .btn-fav {
-      width: 42px;
-      height: 42px;
-    }
-
-    .skeleton-thumb {
-      height: 160px;
-    }
-
-    .skeleton-body {
-      padding: 14px 16px;
-    }
-
-    /* Empty state */
-    .empty-state {
-      padding: 60px 24px;
-    }
-
-    .empty-icon {
-      font-size: 44px;
-    }
-
-    .empty-title {
-      font-size: 18px;
-    }
-
-    .empty-desc {
-      font-size: 13px;
-    }
-
-    /* Results bar */
-    .results-bar {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 2px;
-    }
-
-    .results-query {
-      text-align: left;
-    }
-
-    /* Footer empilhado */
-    .app-footer-inner {
-      padding: 16px 16px;
-      flex-direction: column;
-      align-items: flex-start;
-    }
-
-    .footer-links {
-      gap: 16px;
-    }
-
-    /* Toast fullscreen width */
-    .toast-container {
-      left: 12px;
-      right: 12px;
-      bottom: 12px;
-    }
-
-    .toast {
-      padding: 12px 16px;
-      font-size: 13px;
-    }
+    .toast-container { left: 12px; right: 12px; bottom: 12px; }
+    .toast { padding: 12px 16px; font-size: 13px; }
   }
 
-  /* Celulares muito pequenos (até 380px) */
   @media (max-width: 380px) {
-    .header-inner {
-      padding: 10px 12px;
-    }
-
-    .header-title {
-      font-size: 17px;
-    }
-
-    .search-wrapper input,
-    .local-select,
-    .btn-search {
-      font-size: 16px;
-      border-radius: 10px;
-    }
-
-    .card-thumb {
-      height: 140px;
-    }
-
-    .card-title {
-      font-size: 14px;
-    }
-
-    .card-body {
-      padding: 12px 14px;
-    }
-
-    .card-footer {
-      padding: 2px 14px 12px;
-    }
-
-    .btn-read {
-      padding: 9px 14px;
-      font-size: 12px;
-    }
-
-    .tag-chip {
-      padding: 8px 14px;
-      font-size: 12px;
-    }
-
-    .skeleton-thumb {
-      height: 140px;
-    }
+    .header-inner { padding: 10px 12px; }
+    .header-title { font-size: 17px; }
+    .search-wrapper input, .local-select, .btn-search { font-size: 16px; border-radius: 10px; }
+    .card-thumb { height: 140px; }
+    .card-title { font-size: 14px; }
+    .card-body { padding: 12px 14px; }
+    .card-footer { padding: 2px 14px 12px; }
+    .btn-read { padding: 9px 14px; font-size: 12px; }
+    .tag-chip { padding: 8px 14px; font-size: 12px; }
+    .skeleton-thumb { height: 140px; }
   }
 
-  /* Animação reduce motion */
   @media (prefers-reduced-motion: reduce) {
     .news-card { animation: none; opacity: 1; transform: none; }
     .skeleton-thumb, .skeleton-line { animation: none; }
     .toast { animation: none; opacity: 1; transform: none; }
     .news-card:hover { transform: none; }
+    .btn-icon-header.refreshing i { animation: none; }
+    .auto-refresh-dot { animation: none; }
   }
 </style>
 </head>
 
 <body>
 
-<!-- Brilhos de fundo atmosféricos -->
 <div class="bg-glow"></div>
 <div class="bg-glow-2"></div>
 
@@ -969,9 +853,15 @@ tailwind.config = {
       </div>
       <h1 class="header-title">News<span>Flow</span></h1>
     </div>
-    <button id="btnFavFilter" onclick="toggleFavView()" title="Ver favoritos" class="btn-icon-header" aria-label="Filtrar favoritos">
-      <i class="fa-solid fa-bookmark"></i>
-    </button>
+    <div class="header-actions">
+      <button id="btnRefresh" onclick="forceRefresh()" title="Atualizar notícias" class="btn-icon-header" aria-label="Atualizar notícias">
+        <i class="fa-solid fa-arrows-rotate"></i>
+        <div class="auto-refresh-dot" id="autoRefreshDot"></div>
+      </button>
+      <button id="btnFavFilter" onclick="toggleFavView()" title="Ver favoritos" class="btn-icon-header" aria-label="Filtrar favoritos">
+        <i class="fa-solid fa-bookmark"></i>
+      </button>
+    </div>
   </div>
 </header>
 
@@ -981,16 +871,9 @@ tailwind.config = {
   <section style="margin-bottom:14px;">
     <div class="search-row">
       <div class="search-wrapper" style="flex:1;">
-        <input
-          type="text"
-          id="search"
-          placeholder="Buscar notícias, temas, cidades..."
-          aria-label="Campo de busca de notícias"
-          autocomplete="off"
-        >
+        <input type="text" id="search" placeholder="Buscar notícias, temas, cidades..." aria-label="Campo de busca de notícias" autocomplete="off">
         <i class="fa-solid fa-magnifying-glass search-icon"></i>
       </div>
-
       <select id="localFilter" class="local-select" aria-label="Filtrar por localidade">
         <option value="">Brasil (Geral)</option>
         <option value="Paraná">Paraná</option>
@@ -1000,7 +883,6 @@ tailwind.config = {
         <option value="Maringá">Maringá</option>
         <option value="Cascavel">Cascavel</option>
       </select>
-
       <button class="btn-search" onclick="buscarNoticias()" aria-label="Buscar">
         <i class="fa-solid fa-arrow-right"></i> Buscar
       </button>
@@ -1008,14 +890,20 @@ tailwind.config = {
   </section>
 
   <!-- Tags de categoria -->
-  <section style="margin-bottom:18px;">
+  <section style="margin-bottom:14px;">
     <div class="tags-scroll" id="tagsContainer" role="tablist" aria-label="Categorias de notícias"></div>
   </section>
 
   <!-- Barra de resultados -->
   <div class="results-bar" id="resultsBar" style="display:none;">
-    <div class="results-count" id="resultsCount"></div>
-    <div class="results-query" id="resultsQuery"></div>
+    <div class="results-left">
+      <div class="results-count" id="resultsCount"></div>
+      <div class="cache-badge" id="cacheBadge" style="display:none;"></div>
+    </div>
+    <div class="results-right">
+      <div class="results-timestamp" id="resultsTimestamp" style="display:none;"></div>
+      <div class="results-query" id="resultsQuery"></div>
+    </div>
   </div>
 
   <!-- Skeleton loading -->
@@ -1040,21 +928,19 @@ tailwind.config = {
 
 </main>
 
-<!-- Footer -->
 <footer class="app-footer">
   <div class="app-footer-inner">
-    <div class="footer-brand">
+    <div class="footer-brand" style="color:lightgreen">
       <i class="fa-solid fa-bolt" style="color:#00e59a; font-size:11px;"></i>
-      <span>NewsFlow</span> — Notícias em tempo real via Google News
+      <span style="color:white">NewsFlow</span> — Notícias em tempo real via Google News
     </div>
     <div class="footer-links">
-      <a href="https://news.google.com" target="_blank" rel="noopener noreferrer">Google News</a>
+      <a href="https://news.google.com" target="_blank" rel="noopener noreferrer" style="color:yellow">Google News</a>
       <a href="https://rss2json.com" target="_blank" rel="noopener noreferrer">RSS2JSON</a>
     </div>
   </div>
 </footer>
 
-<!-- Toasts -->
 <div class="toast-container" id="toastContainer" aria-live="polite"></div>
 
 <script>
@@ -1082,7 +968,210 @@ tailwind.config = {
     { label: 'Entretenimento', icon: 'fa-solid fa-film' },
   ];
 
-  // === Renderizar tags ===
+  // ==============================
+  //  SISTEMA DE CACHE
+  // ==============================
+  const CACHE_PREFIX = 'newsflow_cache_';
+  const CACHE_DURATION = 10 * 60 * 1000;       // 10 minutos de validade
+  const AUTO_REFRESH_INTERVAL = 5 * 60 * 1000;  // atualiza a cada 5 minutos
+  let autoRefreshTimer = null;
+  let lastQuery = '';
+  let lastFetchTime = null;
+  let currentRequestId = 0;
+  let isFetching = false;
+
+  // Gera chave de cache baseada na query
+  function getCacheKey(query) {
+    return CACHE_PREFIX + query;
+  }
+
+  // Recupera dados do cache se ainda válido
+  function getCachedData(query) {
+    const key = getCacheKey(query);
+    try {
+      const raw = localStorage.getItem(key);
+      if (!raw) return null;
+      const parsed = JSON.parse(raw);
+      if (Date.now() - parsed.timestamp > CACHE_DURATION) {
+        localStorage.removeItem(key);
+        return null;
+      }
+      return { data: parsed.data, age: Date.now() - parsed.timestamp };
+    } catch {
+      return null;
+    }
+  }
+
+  // Salva dados no cache
+  function setCachedData(query, data) {
+    const key = getCacheKey(query);
+    try {
+      localStorage.setItem(key, JSON.stringify({
+        data: data,
+        timestamp: Date.now()
+      }));
+    } catch (e) {
+      // localStorage cheio — limpar caches expirados
+      cleanOldCaches();
+      try {
+        localStorage.setItem(key, JSON.stringify({
+          data: data,
+          timestamp: Date.now()
+        }));
+      } catch {
+        // Sem espaço mesmo após limpeza
+      }
+    }
+  }
+
+  // Remove todos os caches expirados
+  function cleanOldCaches() {
+    const keysToRemove = [];
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+      if (key && key.startsWith(CACHE_PREFIX)) {
+        try {
+          const raw = localStorage.getItem(key);
+          const parsed = JSON.parse(raw);
+          if (Date.now() - parsed.timestamp > CACHE_DURATION) {
+            keysToRemove.push(key);
+          }
+        } catch {
+          keysToRemove.push(key);
+        }
+      }
+    }
+    keysToRemove.forEach(k => localStorage.removeItem(k));
+  }
+
+  // Formata idade do cache de forma legível
+  function formatCacheAge(ms) {
+    const sec = Math.floor(ms / 1000);
+    if (sec < 60) return `${sec}s`;
+    const min = Math.floor(sec / 60);
+    return `${min}min`;
+  }
+
+  // Formata timestamp de última atualização
+  function formatLastUpdated(date) {
+    const now = new Date();
+    const diffMs = now - date;
+    const diffSec = Math.floor(diffMs / 1000);
+    if (diffSec < 10) return 'Agora';
+    if (diffSec < 60) return `${diffSec}s atrás`;
+    const diffMin = Math.floor(diffSec / 60);
+    if (diffMin < 60) return `${diffMin}min atrás`;
+    return date.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+  }
+
+  // Atualiza indicadores visuais de cache/timestamp
+  function updateCacheIndicators(fromCache, cacheAge) {
+    const badge = document.getElementById('cacheBadge');
+    const timestamp = document.getElementById('resultsTimestamp');
+
+    if (fromCache && cacheAge !== undefined) {
+      badge.style.display = 'inline-flex';
+      badge.className = 'cache-badge from-cache';
+      badge.innerHTML = `<i class="fa-solid fa-database"></i> Cache · ${formatCacheAge(cacheAge)}`;
+    } else {
+      badge.style.display = 'inline-flex';
+      badge.className = 'cache-badge from-api';
+      badge.innerHTML = `<i class="fa-solid fa-signal"></i> Ao vivo`;
+    }
+
+    if (lastFetchTime) {
+      timestamp.style.display = 'flex';
+      timestamp.innerHTML = `<i class="fa-regular fa-clock"></i> ${formatLastUpdated(lastFetchTime)}`;
+    }
+  }
+
+  // ==============================
+  //  AUTO-REFRESH (5 min)
+  // ==============================
+
+  function startAutoRefresh() {
+    stopAutoRefresh();
+    autoRefreshTimer = setInterval(() => {
+      // Só atualiza se: não está em favoritos, tem query, página visível, não está buscando
+      if (state.showingFavs || !lastQuery || document.hidden || isFetching) return;
+
+      silentRefresh();
+    }, AUTO_REFRESH_INTERVAL);
+
+    // Mostrar indicador de que auto-refresh está ativo
+    document.getElementById('autoRefreshDot').classList.add('visible');
+  }
+
+  function stopAutoRefresh() {
+    if (autoRefreshTimer) {
+      clearInterval(autoRefreshTimer);
+      autoRefreshTimer = null;
+    }
+    document.getElementById('autoRefreshDot').classList.remove('visible');
+  }
+
+  // Atualização silenciosa em background — sem skeleton, sem toast
+  async function silentRefresh() {
+    const requestId = ++currentRequestId;
+    const btn = document.getElementById('btnRefresh');
+    btn.classList.add('refreshing');
+
+    try {
+      const rssUrl = `https://news.google.com/rss/search?q=${encodeURIComponent(lastQuery)}&hl=pt-BR&gl=BR&ceid=BR:pt-419`;
+      const proxy = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`;
+      const res = await fetch(proxy);
+      const data = await res.json();
+
+      // Ignorar se a requisição ficou obsoleta
+      if (requestId !== currentRequestId) return;
+      if (state.showingFavs) return;
+
+      if (data.items && data.items.length > 0) {
+        setCachedData(lastQuery, data);
+        lastFetchTime = new Date();
+        state.currentData = data.items;
+
+        // Re-renderizar silenciosamente
+        const container = document.getElementById('news');
+        container.innerHTML = '';
+        data.items.slice(0, 20).forEach((item, i) => {
+          container.appendChild(createCard(item, i));
+        });
+
+        updateCacheIndicators(false);
+      }
+    } catch (err) {
+      // Falha silenciosa — não perturba o usuário
+      console.warn('Auto-refresh falhou:', err);
+    } finally {
+      if (requestId === currentRequestId) {
+        btn.classList.remove('refreshing');
+      }
+    }
+  }
+
+  // Pausar auto-refresh quando a aba não está visível
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      stopAutoRefresh();
+    } else {
+      // Ao voltar, verificar se o cache expirou e precisa de refresh imediato
+      if (lastQuery && !state.showingFavs) {
+        const cached = getCachedData(lastQuery);
+        if (!cached) {
+          // Cache expirou enquanto estava fora — buscar novo
+          buscarNoticias(true);
+        } else {
+          startAutoRefresh();
+        }
+      }
+    }
+  });
+
+  // ==============================
+  //  RENDERIZAR TAGS
+  // ==============================
+
   function renderTags() {
     const container = document.getElementById('tagsContainer');
     if (!container) return;
@@ -1099,7 +1188,10 @@ tailwind.config = {
     `).join('');
   }
 
-  // === Toast ===
+  // ==============================
+  //  TOAST
+  // ==============================
+
   function showToast(message, type = 'info') {
     const container = document.getElementById('toastContainer');
     const icons = {
@@ -1118,7 +1210,10 @@ tailwind.config = {
     }, 3000);
   }
 
-  // === Formatar data relativa ===
+  // ==============================
+  //  UTILITÁRIOS
+  // ==============================
+
   function timeAgo(dateStr) {
     const now = new Date();
     const date = new Date(dateStr);
@@ -1134,7 +1229,6 @@ tailwind.config = {
     return date.toLocaleDateString('pt-BR', { day: '2-digit', month: 'short' });
   }
 
-  // === Extrair domínio ===
   function extractDomain(url) {
     try {
       const u = new URL(url);
@@ -1144,7 +1238,10 @@ tailwind.config = {
     }
   }
 
-  // === Favoritos ===
+  // ==============================
+  //  FAVORITOS
+  // ==============================
+
   function isFav(link) {
     return state.favorites.some(f => f.link === link);
   }
@@ -1168,7 +1265,6 @@ tailwind.config = {
       showToast('Salvo nos favoritos', 'success');
     }
     localStorage.setItem('newsflow_favs', JSON.stringify(state.favorites));
-
     if (state.showingFavs) renderFavs();
   }
 
@@ -1180,6 +1276,7 @@ tailwind.config = {
       btn.style.borderColor = '#f59e0b';
       btn.style.color = '#f59e0b';
       btn.style.background = 'rgba(245,158,11,0.1)';
+      stopAutoRefresh();
       renderFavs();
     } else {
       btn.style.borderColor = '#1e293b';
@@ -1210,14 +1307,18 @@ tailwind.config = {
     resultsBar.style.display = 'flex';
     document.getElementById('resultsCount').innerHTML = `<span>${state.favorites.length}</span> favorito${state.favorites.length !== 1 ? 's' : ''}`;
     document.getElementById('resultsQuery').textContent = '';
+    document.getElementById('cacheBadge').style.display = 'none';
+    document.getElementById('resultsTimestamp').style.display = 'none';
 
     state.favorites.forEach((item, i) => {
-      const card = createCard(item, i);
-      container.appendChild(card);
+      container.appendChild(createCard(item, i));
     });
   }
 
-  // === Criar card ===
+  // ==============================
+  //  CARDS
+  // ==============================
+
   function createCard(item, index) {
     const card = document.createElement('article');
     card.className = 'news-card';
@@ -1227,7 +1328,6 @@ tailwind.config = {
     const hasThumb = item.thumbnail && item.thumbnail.startsWith('http');
     const favClass = isFav(item.link) ? 'saved' : '';
     const favIcon = isFav(item.link) ? 'fa-solid fa-bookmark' : 'fa-regular fa-bookmark';
-
     const cleanDesc = (item.description || '').replace(/<[^>]*>/g, '').trim();
 
     card.innerHTML = `
@@ -1259,7 +1359,10 @@ tailwind.config = {
     return card;
   }
 
-  // === Buscar por tag ===
+  // ==============================
+  //  BUSCA PRINCIPAL (COM CACHE)
+  // ==============================
+
   function buscarTag(tag) {
     const input = document.getElementById('search');
     input.value = tag;
@@ -1283,8 +1386,7 @@ tailwind.config = {
     buscarNoticias();
   }
 
-  // === Buscar notícias ===
-  async function buscarNoticias() {
+  async function buscarNoticias(forceRefresh = false) {
     if (state.showingFavs) return;
 
     const searchTerm = document.getElementById('search').value.trim();
@@ -1303,11 +1405,56 @@ tailwind.config = {
     const emptyState = document.getElementById('emptyState');
     const resultsBar = document.getElementById('resultsBar');
     const skeleton = document.getElementById('skeleton');
+    const btnRefresh = document.getElementById('btnRefresh');
+
+    // 1) Tentar usar cache (se não for forçado)
+    if (!forceRefresh) {
+      const cached = getCachedData(query);
+      if (cached) {
+        // Renderizar do cache instantaneamente
+        container.innerHTML = '';
+        emptyState.style.display = 'none';
+        skeleton.style.display = 'none';
+        resultsBar.style.display = 'flex';
+
+        document.getElementById('resultsCount').innerHTML = `<span>${cached.data.items.length}</span> notícia${cached.data.items.length !== 1 ? 's' : ''} encontrada${cached.data.items.length !== 1 ? 's' : ''}`;
+        document.getElementById('resultsQuery').textContent = `para "${query}"`;
+
+        cached.data.items.slice(0, 20).forEach((item, i) => {
+          container.appendChild(createCard(item, i));
+        });
+
+        state.currentData = cached.data.items;
+        lastQuery = query;
+        updateCacheIndicators(true, cached.age);
+
+        // Atualizar timestamp do cache para exibição
+        const cacheKey = getCacheKey(query);
+        try {
+          const raw = localStorage.getItem(cacheKey);
+          const parsed = JSON.parse(raw);
+          lastFetchTime = new Date(parsed.timestamp);
+          const tsEl = document.getElementById('resultsTimestamp');
+          tsEl.style.display = 'flex';
+          tsEl.innerHTML = `<i class="fa-regular fa-clock"></i> ${formatLastUpdated(lastFetchTime)}`;
+        } catch {}
+
+        // Reiniciar auto-refresh
+        startAutoRefresh();
+        return;
+      }
+    }
+
+    // 2) Buscar da API
+    const requestId = ++currentRequestId;
+    isFetching = true;
+    lastQuery = query;
 
     container.innerHTML = '';
     emptyState.style.display = 'none';
     resultsBar.style.display = 'none';
     skeleton.style.display = 'grid';
+    btnRefresh.classList.add('refreshing');
 
     try {
       const rssUrl = `https://news.google.com/rss/search?q=${encodeURIComponent(query)}&hl=pt-BR&gl=BR&ceid=BR:pt-419`;
@@ -1316,34 +1463,108 @@ tailwind.config = {
       const res = await fetch(proxy);
       const data = await res.json();
 
+      // Ignorar se a requisição ficou obsoleta (outra busca foi iniciada)
+      if (requestId !== currentRequestId) return;
+
       skeleton.style.display = 'none';
 
       if (!data.items || data.items.length === 0) {
         emptyState.style.display = 'block';
         emptyState.querySelector('.empty-title').textContent = 'Nenhuma notícia encontrada';
         emptyState.querySelector('.empty-desc').textContent = `Não encontramos resultados para "${query}". Tente outro termo.`;
+        stopAutoRefresh();
         return;
       }
 
+      // Salvar no cache
+      setCachedData(query, data);
+      lastFetchTime = new Date();
       state.currentData = data.items;
 
+      // Renderizar
       resultsBar.style.display = 'flex';
       document.getElementById('resultsCount').innerHTML = `<span>${data.items.length}</span> notícia${data.items.length !== 1 ? 's' : ''} encontrada${data.items.length !== 1 ? 's' : ''}`;
       document.getElementById('resultsQuery').textContent = `para "${query}"`;
 
       data.items.slice(0, 20).forEach((item, i) => {
-        const card = createCard(item, i);
-        container.appendChild(card);
+        container.appendChild(createCard(item, i));
       });
 
+      updateCacheIndicators(false);
+
+      // Iniciar auto-refresh
+      startAutoRefresh();
+
     } catch (err) {
+      if (requestId !== currentRequestId) return;
+
       skeleton.style.display = 'none';
-      showToast('Erro ao carregar notícias. Verifique sua conexão.', 'error');
+
+      // Se teve erro mas tem cache (mesmo expirado), usar como fallback
+      const staleCache = getCachedData(query);
+      // Tentar buscar cache mesmo expirado
+      const key = getCacheKey(query);
+      let fallbackData = null;
+      try {
+        const raw = localStorage.getItem(key);
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          fallbackData = parsed.data;
+        }
+      } catch {}
+
+      if (fallbackData && fallbackData.items && fallbackData.items.length > 0) {
+        // Mostrar dados antigos com aviso
+        resultsBar.style.display = 'flex';
+        document.getElementById('resultsCount').innerHTML = `<span>${fallbackData.items.length}</span> notícia${fallbackData.items.length !== 1 ? 's' : ''}`;
+        document.getElementById('resultsQuery').textContent = `para "${query}"`;
+
+        fallbackData.items.slice(0, 20).forEach((item, i) => {
+          container.appendChild(createCard(item, i));
+        });
+
+        const badge = document.getElementById('cacheBadge');
+        badge.style.display = 'inline-flex';
+        badge.className = 'cache-badge from-cache';
+        badge.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i> Offline · cache antigo`;
+
+        showToast('Sem conexão. Exibindo dados em cache.', 'error');
+      } else {
+        showToast('Erro ao carregar notícias. Verifique sua conexão.', 'error');
+      }
+
+      stopAutoRefresh();
       console.error(err);
+
+    } finally {
+      if (requestId === currentRequestId) {
+        isFetching = false;
+        btnRefresh.classList.remove('refreshing');
+      }
     }
   }
 
-  // === Evento de tecla ENTER ===
+  // Forçar atualização manual (ignora cache)
+  function forceRefresh() {
+    if (state.showingFavs) {
+      showToast('Sai da visualização de favoritos para atualizar.', 'info');
+      return;
+    }
+    if (isFetching) return;
+
+    // Limpar cache da query atual para forçar nova busca
+    if (lastQuery) {
+      localStorage.removeItem(getCacheKey(lastQuery));
+    }
+
+    showToast('Atualizando notícias...', 'info');
+    buscarNoticias(true);
+  }
+
+  // ==============================
+  //  EVENTOS
+  // ==============================
+
   document.getElementById('search').addEventListener('keydown', function(e) {
     if (e.key === 'Enter') {
       state.activeTag = null;
@@ -1352,14 +1573,19 @@ tailwind.config = {
     }
   });
 
-  // === Alterar localidade dispara busca ===
   document.getElementById('localFilter').addEventListener('change', function() {
     state.activeTag = null;
     renderTags();
     buscarNoticias();
   });
 
-  // === Inicialização ===
+  // ==============================
+  //  INICIALIZAÇÃO
+  // ==============================
+
+  // Limpar caches expirados ao abrir
+  cleanOldCaches();
+
   renderTags();
   buscarNoticias();
 </script>
